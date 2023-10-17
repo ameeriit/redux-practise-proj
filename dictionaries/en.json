@@ -1,0 +1,9 @@
+{
+  "form": {
+    "username": "name",
+    "password": "password"
+  },
+  "about_us": "About us",
+  "contact_us": "Contact us",
+  "description": "Our company provides high-quality products and services."
+}
