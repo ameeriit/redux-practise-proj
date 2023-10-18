@@ -1,14 +1,15 @@
-"use client";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
+
 import { AuthState } from "../storeTypes";
 import { loginUser } from "../thunks/authThunks";
 
-const tokenFromCookies = Cookies.get("token");
 const userDataFromCookies = Cookies.get("userData")
   ? JSON.parse(Cookies.get("userData") || "{}")
   : null;
+
+const tokenFromCookies = Cookies.get("token");
 
 const initialState: AuthState = {
   user: userDataFromCookies || {
@@ -23,21 +24,28 @@ const initialState: AuthState = {
   isAuthenticated: !!tokenFromCookies,
   isLoading: false,
   error: null,
-  token: "",
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setAuthenticated: (state, action) => {
+    setAuthenticated: (
+      state,
+      action: PayloadAction<{ user: any; token: string }>
+    ) => {
+      state.user = action.payload.user;
+      state.user.token = action.payload.token;
       state.isAuthenticated = true;
+      state.error = null;
     },
     logout: (state) => {
-      state.user.username = "";
-      state.user.email = "";
+      state.user = initialState.user;
       state.isAuthenticated = false;
-      state.token = "";
+      state.error = null;
+    },
+    setError: (state, action: PayloadAction<string | null>) => {
+      state.error = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -54,10 +62,10 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error.message ?? null;
+        state.error = (action.payload as string | null) || "An error occurred.";
       });
   },
 });
 
-export const { setAuthenticated, logout } = authSlice.actions;
+export const { setAuthenticated, logout, setError } = authSlice.actions;
 export default authSlice.reducer;

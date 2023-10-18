@@ -1,7 +1,7 @@
 {
   "form": {
-    "username": "name",
-    "password": "password"
+    "username": "Name",
+    "password": "Password"
   },
   "about_us": "About us",
   "contact_us": "Contact us",

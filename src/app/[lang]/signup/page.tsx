@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from "@/protectedRoute/ProtectedRoute";
 
 export default function page() {
   return (

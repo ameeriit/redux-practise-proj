@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { ProductState } from "../storeTypes";
-import { fetchProductThunks } from "../thunks/fetchProductThunks";
+import { getAllProductThunks } from "../thunks/getAllProductThunks";
 
 const initialState: ProductState = {
   products: [],
@@ -8,24 +9,24 @@ const initialState: ProductState = {
   error: null,
 };
 
-const productSlice = createSlice({
+const allProductSlice = createSlice({
   name: "products",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProductThunks.pending, (state) => {
+      .addCase(getAllProductThunks.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchProductThunks.fulfilled, (state, action) => {
+      .addCase(getAllProductThunks.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.products = action.payload.products;
       })
-      .addCase(fetchProductThunks.rejected, (state, action) => {
+      .addCase(getAllProductThunks.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? null;
       });
   },
 });
 
-export default productSlice.reducer;
+export default allProductSlice.reducer;

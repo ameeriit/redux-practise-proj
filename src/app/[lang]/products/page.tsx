@@ -1,11 +1,14 @@
 "use client";
 
-import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
-import { AppDispatch, RootState } from "@/store/store";
-import { fetchProductThunks } from "@/store/thunks/fetchProductThunks";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+
+import { AppDispatch, RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
+
+import { getAllProductThunks } from "@/store/thunks/getAllProductThunks";
+
+import ProtectedRoute from "@/protectedRoute/ProtectedRoute";
 
 const page = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -15,26 +18,38 @@ const page = () => {
   const router = useRouter();
 
   useEffect(() => {
-    dispatch(fetchProductThunks());
+    dispatch(getAllProductThunks());
   }, [dispatch]);
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center w-[100%] h-[100vh]">
+        Loading...
+      </div>
+    );
   }
 
   if (status === "failed") {
     return <div>Error: {error || "An error occurred"}</div>;
   }
 
+  const handleClick = () => {
+    router.push(`/products/$id`);
+  };
+
   return (
     <ProtectedRoute>
-      <div>
-        <h1>Product List</h1>
+      <div className="container mx-auto p-12">
+        <h1 className="text-4xl mb-4">Product List</h1>
         <ul>
           {products.map((product: any) => (
-            <li key={product.id} className="cursor-pointer">
-              <h2>{product.title}</h2>
-              <p>{product.description}</p>
+            <li
+              key={product.id}
+              onClick={handleClick}
+              className="cursor-pointer border-white rounded-lg border-[1px] mb-4 px-4 pt-3 pb-4"
+            >
+              <h2 className="mb-2">{product.title}</h2>
+              <p className="mb-1">{product.description}</p>
               <p>Price: ${product.price}</p>
             </li>
           ))}

@@ -1,17 +1,16 @@
 export interface AuthState {
   user: {
-    username: "";
-    email: "";
-    firstName: "";
-    lastName: "";
-    gender: "";
-    image: "";
-    token: "";
+    username: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    gender: string;
+    image: string;
+    token: string;
   };
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
-  token: string;
 }
 
 export interface ProductState {

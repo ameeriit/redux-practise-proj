@@ -2,18 +2,18 @@ import LoginForm from "@/components/LoginForm";
 
 export default function page() {
   return (
-    <>
-      <div className="flex justify-center items-center h-[80vh]">
+    <div className="container mx-auto">
+      <div className="py-12">
+        <h1 className="text-4xl pb-12 text-center">This is Login Page</h1>
+        <LoginForm />
         <div>
-          This is my login page
-          <h2>Login</h2>
-          <LoginForm />
-          <div>
-            <p>username: 'kminchelle', </p>
-            <p>password: '0lelplR',</p>
-          </div>
+          <p className="text-2xl mb-3">
+            Use credentials to login and is how auth is working
+          </p>
+          <p className="mb-1">Username: 'kminchelle', </p>
+          <p className="mb-1">Password: '0lelplR',</p>
         </div>
       </div>
-    </>
+    </div>
   );
 }

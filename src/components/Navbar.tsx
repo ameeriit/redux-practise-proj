@@ -1,11 +1,14 @@
 "use client";
 
-import { logout } from "@/store/slices/authSlices";
-import { RootState } from "@/store/store";
-import Cookies from "js-cookie";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+
+import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
+
+import Cookies from "js-cookie";
+
+import { logout } from "@/store/slices/authSlices";
 
 export default function Navbar() {
   const router = useRouter();
@@ -26,17 +29,17 @@ export default function Navbar() {
   const isLoginPage = pathname === "/login";
 
   return (
-    <nav className="flex justify-between bg-slate-800 text-white w-full">
+    <nav className="flex justify-between bg-slate-800 text-white w-full px-12">
       <div className="container mx-auto flex justify-between py-4">
         <Link href="/">Ameeriit</Link>
         <div className="flex gap-10">
-          {/* <p>{user.username}</p> */}
-          <Link href={"/products"}>product</Link>
+          {isAuthenticated && <Link href={"/products"}>Product</Link>}
+          <p className="capitalize">{user.username}</p>
           <div>
             {isAuthenticated && <button onClick={handleLogout}>Logout</button>}
           </div>
           <div>
-            {!isAuthenticated && !isLoginPage && <a href="/login">login</a>}
+            {!isAuthenticated && !isLoginPage && <a href="/login">Login</a>}
           </div>
         </div>
       </div>

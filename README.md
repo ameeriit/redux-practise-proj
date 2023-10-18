@@ -1,6 +1,6 @@
-# Project Name
+# SandBox Project
 
-A brief description of your project goes here.
+This sandbox project is a dynamic web application built using Next.js and React. It offers a seamless user experience with features like authentication and authorization, multi-language support, and asynchronous data fetching. With Redux for state management, the project ensures secure user authentication and data persistence through cookies. The use of "no-SSR" components resolves timing-related rendering issues which is also used for solving hydration issues in critical time. This project interacts with external APIs for data retrieval and leverages various technologies, including Axios for HTTP requests and js-cookie for managing user tokens.
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ A brief description of your project goes here.
 
 ## Introduction
 
-Provide a brief introduction to your project, including its purpose and key features.
+Web application that brings together the power of modern web technologies to provide an exceptional user experience. This project is designed with a focus on seamless authentication, internationalization, and efficient data handling.
 
 ## Installation
 
@@ -44,10 +44,11 @@ Installation process for the project.
 
 ## Folder Structure
 
-- pages/
+- app/
 - components/
-- redux/
-- public/
+- dictionaries/
+- protectedRoute/
+- store/
 
 ## Authentication and Authorization
 
@@ -101,6 +102,8 @@ This project uses Next.js Internationalization to support multiple languages, in
 
 - To display localized text, import the respective dictionary file and use the translation keys within your components.
 - For example, if you want to display the "Hello, World" text, you would use the translation key, and the correct translation will be displayed based on the selected language. Your can see Example in home page which is implemented there.
+
+To see this feature working change the en into np in url.
 
 With this internationalization setup, your application can seamlessly switch between different languages, making it accessible and user-friendly for a broader audience. Feel free to expand on this information or provide code examples relevant to your project to further clarify the implementation.
 
@@ -164,6 +167,25 @@ In summary, "no-SSR" components are a valuable tool for preventing hydration iss
 
 "The API is freely accessible and comes with its documentation, readily available on its website. Please feel free to explore and utilize it based on your project's specific requirements and preferences."
 
-**\*\*\*\***(https://dummyjson.com)**\*\*\*\***
+**[dummyjson.com](https://dummyjson.com)**
+
+## External Dependencies
+
+- intl-localematcher
+- redux toolkit
+- axios
+- js-cookie
+- negotiator
+
+## Technology Stack
+
+- Next.js
+- React
+- Redux Toolkit
+- Axios
+- js-cookie
+- intl-localematcher
+- Negotiator
+- External API (dummyjson.com)
 
 Feel free to adapt this text to your specific project details and expand it further if necessary.

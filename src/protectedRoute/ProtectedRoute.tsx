@@ -1,9 +1,11 @@
 "use client";
 
-import { RootState } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
+
 import { useSelector } from "react-redux";
+
+import { RootState } from "@/store/store";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = useSelector(

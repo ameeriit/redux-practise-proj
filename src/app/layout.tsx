@@ -1,9 +1,11 @@
-import StoreProvider from "@/store/StoreProvider";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import react from "react";
+
 import "./globals.css";
+
+import StoreProvider from "@/store/StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
