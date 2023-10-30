@@ -23,10 +23,6 @@ interface RootLayoutProps {
   };
 }
 
-export async function generateStaticParams() {
-  return [{ lang: "en" }, { lang: "np" }];
-}
-
 export default function RootLayout({ children, params }: RootLayoutProps) {
   return (
     <html lang={params.lang}>

@@ -1,12 +1,11 @@
 import dynamic from "next/dynamic";
 
 import { getDictionary } from "./dictionaries";
-import { ValidLocales } from "./langTypes";
 
 export default async function Page({
   params: { lang },
 }: {
-  params: { lang: ValidLocales };
+  params: { lang: "en" | "np" };
 }) {
   const dict = await getDictionary(lang);
 
@@ -18,6 +17,7 @@ export default async function Page({
   return (
     <div className="container mx-auto px-10">
       <div className="pt-6">
+        <div></div>
         <h1 className="text-4xl pb-12 text-center">This is Home Page</h1>
         <div className="mb-8">
           <p>{dict.form.username}</p>
@@ -26,7 +26,6 @@ export default async function Page({
           <p>{dict.contact_us}</p>
           <p>{dict.description}</p>
         </div>
-
         <UserDataAfterLogin />
       </div>
     </div>

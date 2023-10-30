@@ -1,11 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
-
-import { useSelector } from "react-redux";
-
 import { RootState } from "@/store/store";
+import { useRouter } from "next/navigation";
+import { ReactNode, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = useSelector(
@@ -13,10 +11,11 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   );
   const router = useRouter();
 
-  if (!isAuthenticated) {
-    router.push("/login");
-    return null;
-  }
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [isAuthenticated]);
 
   return children;
 };

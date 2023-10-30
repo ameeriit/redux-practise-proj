@@ -6,8 +6,7 @@ import { FormEvent, useState } from "react";
 import { AppDispatch, RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setError } from "@/store/slices/authSlices";
-import { loginUser } from "@/store/thunks/authThunks";
+import { loginUser, setError } from "@/store/slices/authSlices";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");

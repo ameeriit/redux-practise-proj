@@ -1,9 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import Cookies from "js-cookie";
 
+import { handleError } from "@/utils/error";
+import axiosInstance from "../api/apiInstance";
 import { AuthState } from "../storeTypes";
-import { loginUser } from "../thunks/authThunks";
 
 const userDataFromCookies = Cookies.get("userData")
   ? JSON.parse(Cookies.get("userData") || "{}")
@@ -25,6 +26,33 @@ const initialState: AuthState = {
   isLoading: false,
   error: null,
 };
+
+export interface LoginPayload {
+  username: string;
+  password: string;
+}
+
+export const loginUser = createAsyncThunk(
+  "auth/login",
+  async ({ username, password }: LoginPayload, { dispatch }) => {
+    try {
+      const response = await axiosInstance.post("auth/login", {
+        username,
+        password,
+      });
+
+      const data = response.data;
+      const token = data.token;
+
+      Cookies.set("userData", JSON.stringify(data));
+      Cookies.set("token", token);
+
+      return data;
+    } catch (error) {
+      handleError(error);
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",

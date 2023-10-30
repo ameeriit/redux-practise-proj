@@ -1,13 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+import { handleError } from "@/utils/error";
+import axiosInstance from "../api/apiInstance";
 import { ProductState } from "../storeTypes";
-import { getAllProductThunks } from "../thunks/getAllProductThunks";
 
 const initialState: ProductState = {
   products: [],
   status: "idle",
   error: null,
 };
+
+export const getAllProductThunks = createAsyncThunk(
+  "products/all",
+  async () => {
+    try {
+      const response = await axiosInstance.get("products");
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        throw new Error(`Unexpected response status: ${response.status}`);
+      }
+    } catch (error) {
+      handleError(error);
+    }
+  }
+);
 
 const allProductSlice = createSlice({
   name: "products",

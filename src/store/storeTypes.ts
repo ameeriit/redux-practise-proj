@@ -18,3 +18,9 @@ export interface ProductState {
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
+
+export interface TodoState {
+  todos: [];
+  isLoading: boolean;
+  error: string | null;
+}
